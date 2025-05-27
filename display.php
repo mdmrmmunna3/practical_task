@@ -1,6 +1,6 @@
 <?php
 require_once("dbConnect.php");
-
+$message = '';
 
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
@@ -14,8 +14,6 @@ if (isset($_GET['delete'])) {
     //     $id = $_POST["delete"];
 // $conn->query("DELETE FROM tasks WHERE id = '$id'");
 }
-
-
 
 ?>
 
@@ -51,14 +49,15 @@ if (isset($_GET['delete'])) {
     <div class="task_btn">
         <a href="insert.php">Add New Task</a>
     </div>
+
     <div class="toast align-items-center" id="successToast" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="d-flex">
-                <div class="toast-body">
-                    <?php echo htmlspecialchars($message); ?>
-                </div>
-                <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        <div class="d-flex">
+            <div class="toast-body">
+                <?php echo htmlspecialchars($message); ?>
             </div>
+            <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
+    </div>
 
     <div class="table_container container mt-5">
         <p class="text-center text-uppercase fs-2 text-primary font-serif">Display All Tasks</p>
@@ -101,8 +100,6 @@ if (isset($_GET['delete'])) {
                 ?>
             </tbody>
         </table>
-
-        
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
@@ -138,7 +135,6 @@ if (isset($_GET['delete'])) {
             });
         });
 
-
         document.addEventListener('DOMContentLoaded', () => {
             const message = "<?php echo addslashes($message); ?>";
             if (message.trim() !== '') {
@@ -154,6 +150,7 @@ if (isset($_GET['delete'])) {
                 }
             }
         });
+
     </script>
     <script src="script.js"></script>
 </body>

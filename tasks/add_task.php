@@ -1,9 +1,25 @@
 <?php 
 require_once 'db.php';
-$title = $_POST['title'];
-$description = $_POST['description'];
-$conn->query("INSERT INTO tasks(title, description) VALUES('$title', '$description)");
+
+if (isset($_POST['title']) && isset($_POST['description'])) {
+    $title = $_POST['title'];
+    $description = $_POST['description'];
+
+    $stmt = $conn->prepare("INSERT INTO taskss(title, description) VALUES (?, ?)");
+    $stmt->bind_param("ss", $title, $description);
+
+    if ($stmt->execute()) {
+        echo "Task added successfully!";
+    } else {
+        echo "Error: " . $stmt->error;
+    }
+
+    $stmt->close();
+} else {
+    echo "Title or description is missing.";
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
